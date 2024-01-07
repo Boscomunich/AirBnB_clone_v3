@@ -13,7 +13,7 @@ def get_states():
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
-'''Gets the state with the given id or all states.'''
+    '''Gets the state with the given id or all states.'''
     state = storage.get('State', state_id)
     if state is None:
         abort(404)
@@ -21,7 +21,7 @@ def get_state(state_id):
 
 @app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
-'''Removes a state with the given id.'''
+    '''Removes a state with the given id.'''
     state = storage.get('State', state_id)
     if state is None:
         abort(404)
@@ -31,7 +31,7 @@ def delete_state(state_id):
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
-'''Adds a new state.'''
+    '''Adds a new state.'''
     if not request.get_json():
         abort(400, description="Not a JSON")
     if 'name' not in request.get_json():
@@ -42,11 +42,11 @@ def create_state():
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
-'''Updates the state with the given id.'''
+    '''Updates the state with the given id.'''
     state = storage.get('State', state_id)
     if state is None:
         abort(404)
-    if not request.get_json():
+    if not request.get_json(): 
         abort(400, description="Not a JSON")
     for key, value in request.get_json().items():
         if key not in ['id', 'created_at', 'updated_at']:
