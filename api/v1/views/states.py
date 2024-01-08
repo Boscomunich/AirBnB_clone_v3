@@ -23,7 +23,8 @@ def get_state(state_id):
     return jsonify(state.to_dict())
 
 
-@app_views.route('/states/<path:state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<path:state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_state(state_id):
     if state_id is None:
         abort(404)
@@ -47,7 +48,8 @@ def post_state():
     return jsonify(new_state.to_dict()), 201
 
 
-@app_views.route('/states/<path:state_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/states/<path:state_id>', methods=['PUT'],
+                 strict_slashes=False)
 def put_state(state_id):
     state = storage.get(State, state_id)
     if state is None:
@@ -60,4 +62,3 @@ def put_state(state_id):
             setattr(state, key, value)
     storage.save()
     return jsonify(state.to_dict()), 200
-

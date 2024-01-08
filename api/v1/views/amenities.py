@@ -5,7 +5,6 @@ from models import storage
 from models.amenity import Amenity
 from api.v1.views import app_views
 from flask import jsonify, abort, request
-from flasgger.utils import swag_from
 
 
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
@@ -17,7 +16,8 @@ def amenities():
     return jsonify(res)
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', methods=['GET'],
+                 strict_slashes=False)
 def amenity_by_id(amenity_id):
     """Gets the amenity with the given id or all amenities"""
     res = storage.get(Amenity, amenity_id)
@@ -26,7 +26,8 @@ def amenity_by_id(amenity_id):
     return jsonify(res.to_dict())
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_amenity(amenity_id):
     """Removes a amenity with the given id."""
     amenity = storage.get(Amenity, amenity_id)
@@ -50,7 +51,8 @@ def insert_amenity():
     return jsonify(new_amenity.to_dict()), 201
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', methods=['PUT'],
+                 strict_slashes=False)
 def update_amenity_by_id(amenity_id):
     """Updates the amenity with the given id."""
     amenity = storage.get(Amenity, amenity_id)
