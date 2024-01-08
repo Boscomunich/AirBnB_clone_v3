@@ -1,18 +1,20 @@
 #!/usr/bin/python3
-'''a flask web api.
+'''A flask web api for Airbnb
 '''
-import os
+from api.v1.views import app_views
 from flask import Flask, jsonify
+from models import storage
+import os
 from flask_cors import CORS
 
-from models import storage
-from api.v1.views import app_views
 
 
 app = Flask(__name__)
-'''The flask web app instance'''
+'''The flask web app instance named app'''
 app.url_map.strict_slashes = False
 app.register_blueprint(app_views)
+
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 @app.teardown_appcontext
 def teardown_flask(exception):
